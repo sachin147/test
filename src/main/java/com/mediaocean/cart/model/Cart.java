@@ -8,8 +8,8 @@ public class Cart {
 	
 	private String customerName;
 	private List<Product> products;
-	//private BillGenerator billGenerator = new BillGenerator();  ------>  delegate
-	//private TaxCalculator taxCalculator = new TaxCalculator();  ------>  delegate
+	//private BillGenerator billGenerator = new BillGenerator();  ------>  delegate to utility class
+	//private TaxCalculator taxCalculator = new TaxCalculator();  ------>  delegate to utility class
 	
 	public String getCustomerName() {
 		return customerName;
