@@ -1,6 +1,7 @@
 package com.mediaocean.cart.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.mediaocean.product.model.Product;
 
@@ -56,11 +57,13 @@ public class Cart {
 	}
 
 	public double getTotalCost() {
-		double totalAmount = 0.0;
+		/*double totalAmount = 0.0;
 		for(Product product : products) {
 			totalAmount += product.getCost();
 		}
-		return totalAmount;
+		return totalAmount;*/
+		return products.stream().map(x -> x.getCost()).reduce(0.0, Double::sum);
+
 	}
 
 }
