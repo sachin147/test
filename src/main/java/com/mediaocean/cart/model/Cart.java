@@ -8,6 +8,8 @@ public class Cart {
 	
 	private String customerName;
 	private List<Product> products;
+	//private BillGenerator billGenerator = new BillGenerator();  ------>  delegate
+	//private TaxCalculator taxCalculator = new TaxCalculator();  ------>  delegate
 	
 	public String getCustomerName() {
 		return customerName;
@@ -23,6 +25,8 @@ public class Cart {
 	}
 	
 	public String getBill() {
+		//return billgenerator.getBill(products);
+
 		StringBuilder billStatement = new StringBuilder();
 		billStatement.append("--- id --- | ---name---| ---price--- | ---tax---");
 		billStatement.append("\n");
@@ -45,6 +49,7 @@ public class Cart {
 	public double getTotalSalesTax() {
 		double totalSalesTaxAmount = 0.0;
 		for(Product product : products) {
+			//totalSalesTaxAmount += taxCalculator.calculateTax(product)
 			totalSalesTaxAmount += product.getPrice() * product.getCategory().getTaxRate();
 		}
 		return  totalSalesTaxAmount;
