@@ -1,11 +1,18 @@
 import com.mediaocean.cart.model.Cart
+import com.mediaocean.cart.service.CartService
 import com.mediaocean.product.model.CategoryA
 import com.mediaocean.product.model.CategoryB
 import com.mediaocean.product.model.CategoryC
 import com.mediaocean.product.model.Product
 import spock.lang.Specification
 
-class ProductTest extends Specification {
+class CartServiceSpecification extends Specification {
+
+    CartService cartService
+
+    void setup() {
+        cartService = new CartService()
+    }
 
     def "should return total bill amount"() {
         given:
@@ -32,13 +39,26 @@ class ProductTest extends Specification {
         products.add(product2)
         products.add(product3)
 
-        Cart cart = new Cart()
-        cart.setProducts(products)
-
         when:
-        double amount = cart.getTotalCost()
+        Double amount = cartService.getTotalCost(products)
 
         then:
-        assert amount
+        amount
+    }
+
+    def "should return sales tax amount of a product"() {
+        given:
+
+        Product product = new Product();
+        product.setProductId(1)
+        product.setName("Product1")
+        product.setCategory(new CategoryA())
+        product.setPrice(100)
+
+        when:
+        Double salesTaxAmount = cartService.getSalesTaxAmount(product)
+
+        then:
+        salesTaxAmount
     }
 }
