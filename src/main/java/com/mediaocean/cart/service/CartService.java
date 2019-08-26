@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CartService {
 
-    public String getBill(Cart cart) {
+    String getBill(Cart cart) {
         List<Product> products = cart.getProducts();
         StringBuilder billStatement = new StringBuilder();
         billStatement.append("--- id --- | ---name---| ---price--- | ---tax---");
@@ -28,7 +28,7 @@ public class CartService {
         return billStatement.toString();
     }
 
-    public Double getTotalSalesTax(List<Product> products) {
+    Double getTotalSalesTax(List<Product> products) {
         Double totalSalesTaxAmount = 0.0d;
         for(Product product : products) {
             totalSalesTaxAmount += getSalesTaxAmount(product);
@@ -36,11 +36,11 @@ public class CartService {
         return  totalSalesTaxAmount;
     }
 
-    public double getSalesTaxAmount(Product product) {
+    Double getSalesTaxAmount(Product product) {
         return product.getPrice() * product.getCategory().getTaxRate();
     }
 
-    public Double getTotalCost(List<Product> products) {
+     Double getTotalCost(List<Product> products) {
         return products.stream().map(x -> x.getCost()).reduce(0.0, Double::sum);
     }
 }
